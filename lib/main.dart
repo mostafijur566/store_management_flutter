@@ -1,7 +1,14 @@
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:store_management_flutter/pages/dashboard_page.dart';
 
 void main() {
   runApp(const MyApp());
+  doWhenWindowReady(() {
+    var initialSize = const Size(1260, 680);
+    appWindow.size = initialSize;
+    appWindow.minSize = initialSize;
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +31,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      //home:
+      home: DashboardPage(),
     );
   }
 }
