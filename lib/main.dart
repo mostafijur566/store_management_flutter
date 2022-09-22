@@ -1,14 +1,18 @@
+import 'dart:io';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
-import 'package:store_management_flutter/pages/dashboard_page.dart';
+import 'package:store_management_flutter/pages/sign_in_page.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
-  doWhenWindowReady(() {
-    var initialSize = const Size(1260, 680);
-    appWindow.size = initialSize;
-    appWindow.minSize = initialSize;
-  });
+  if(Platform.isWindows || Platform.isMacOS || Platform.isLinux){
+    doWhenWindowReady(() {
+      var initialSize = const Size(1260, 680);
+      appWindow.size = initialSize;
+      appWindow.minSize = initialSize;
+    });
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +21,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -31,7 +35,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: DashboardPage(),
+      home: SignInPage(),
     );
   }
 }
