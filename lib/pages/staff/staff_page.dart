@@ -49,6 +49,8 @@ class _StaffPageState extends State<StaffPage> {
               children: [
                 Row(
                   children: [
+                    Icon(FontAwesomeIcons.angleLeft, color: Colors.white,),
+                    SizedBox(width: 10,),
                     Image.asset('assets/images/logo.jpg', width: 24,),
                     SizedBox(width: 10,),
                     BigText(text: 'Staff', color: Colors.white,),
