@@ -45,7 +45,7 @@ class _SignInPageState extends State<SignInPage> {
     }
   }
 
-  _mobile(BuildContext context){
+  Widget _mobile(BuildContext context){
     return SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -126,7 +126,7 @@ class _SignInPageState extends State<SignInPage> {
         )
     );
   }
-  _desktop(){
+  Widget _desktop(){
     return Center(
       child: Container(
         padding: EdgeInsets.only(top: 10, left: 20, right: 20),
