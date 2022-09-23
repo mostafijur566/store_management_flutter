@@ -181,6 +181,8 @@ class _StaffPageState extends State<StaffPage> {
                 ),
                 Row(
                   children: [
+                    BigText(text: 'Dashboard', color: Colors.white,),
+                    SizedBox(width: 10,),
                     BigText(text: 'Profile', color: Colors.white,),
                     SizedBox(width: 10,),
                     BigText(text: 'Logout', color: Colors.white,),

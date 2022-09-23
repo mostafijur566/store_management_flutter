@@ -15,7 +15,7 @@ class AddStaffMobile extends StatefulWidget {
 class _AddStaffMobileState extends State<AddStaffMobile> {
   String accountType = "admin";
   int _value = 0;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
