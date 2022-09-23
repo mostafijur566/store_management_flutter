@@ -82,7 +82,7 @@ class _StaffPageState extends State<StaffPage> {
                 //_runFilter(value);
               },
               decoration: InputDecoration(
-                hintText: 'Search...',
+                hintText: 'Search Staff...',
                 prefixIcon: Icon(Icons.search,
                   color: AppColors.mainColor,
                 ),
@@ -287,7 +287,7 @@ class _StaffPageState extends State<StaffPage> {
                             //_runFilter(value);
                           },
                           decoration: InputDecoration(
-                            hintText: 'Search...',
+                            hintText: 'Search Staff...',
                             prefixIcon: Icon(Icons.search,
                               color: AppColors.mainColor,
                             ),
