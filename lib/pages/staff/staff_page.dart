@@ -209,7 +209,7 @@ class _StaffPageState extends State<StaffPage> {
                 child: Column(
                   children: [
                     SizedBox(height: 10,),
-                    BigText(text: 'Add Staff', fontWeight: FontWeight.bold,),
+                    BigText(text: 'Add Account', fontWeight: FontWeight.bold,),
                     SizedBox(height: 20,),
                     Icon(FontAwesomeIcons.user, size: 50),
                     MyInputField(title: 'Email', hint: 'email'),
@@ -256,7 +256,7 @@ class _StaffPageState extends State<StaffPage> {
                         color: AppColors.mainColor,
 
                       ),
-                      child: Center(child: Text('Add account', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),)),
+                      child: Center(child: Text('Create account', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),)),
                     ),
                     SizedBox(height: 40,),
                   ],
@@ -326,10 +326,10 @@ class _StaffPageState extends State<StaffPage> {
                       ),
                       ListView.builder(
                           shrinkWrap: true,
-                          itemCount: 3,
+                          itemCount: 50,
                           itemBuilder: (context, index){
                             return Container(
-                                color: Colors.white,
+                                color: index % 2 == 0 ? Colors.white : Colors.grey[200],
                                 margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.02, right: MediaQuery.of(context).size.width * 0.02),
                                 child: Column(
                                   children: [
