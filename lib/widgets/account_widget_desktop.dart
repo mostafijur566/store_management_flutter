@@ -22,6 +22,7 @@ class AccountWidgetDesktop extends StatelessWidget {
 
       decoration: BoxDecoration(
           color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
                 offset: Offset(0, 5),

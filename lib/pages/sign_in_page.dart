@@ -121,32 +121,51 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                 ),
               ),
+              SizedBox(height: 30,),
+              BigText(text: 'Powered by Mostafijur Rahman', size: 16, color: Colors.grey[700],)
             ],
           ),
         )
     );
   }
   Widget _desktop(){
-    return Center(
-      child: Container(
-        padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-        height: 400,
-        child: Column(
-          children: [
-            Text('Store Management', style: TextStyle(
-                fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold
-            ),),
-            SizedBox(height: 20,),
-            MyInputField(title: 'Email', hint: 'Enter your email'),
-            MyInputField(title: 'Password', hint: 'Enter your password', hideText: true,),
-            SizedBox(height: 20,),
-            Button(title: "Log In",)
-          ],
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.white,
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(top: 70),
+      child: Column(
+        children: [
+          Center(
+            child: Container(
+              padding: EdgeInsets.only(top: 10, left: 20, right: 20),
+              height: 400,
+              child: Column(
+                children: [
+                  Text('Store Management', style: TextStyle(
+                      fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold
+                  ),),
+                  SizedBox(height: 20,),
+                  MyInputField(title: 'Email', hint: 'Enter your email'),
+                  MyInputField(title: 'Password', hint: 'Enter your password', hideText: true,),
+                  SizedBox(height: 20,),
+                  Button(title: "Log In",)
+                ],
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 7,
+                      spreadRadius: 10,
+                      offset: Offset(0,0),
+                      color: Colors.grey.withOpacity(0.4),
+                    )
+                  ]
+              ),
+            ),
+          ),
+          SizedBox(height: 20,),
+          BigText(text: 'Powered by Mostafijur Rahman', size: 16, color: Colors.grey[700],)
+        ],
       ),
     );
   }
