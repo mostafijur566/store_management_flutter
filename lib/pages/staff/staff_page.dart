@@ -213,7 +213,7 @@ class _StaffPageState extends State<StaffPage> {
                     SizedBox(height: 10,),
                     BigText(text: 'Add Account', fontWeight: FontWeight.bold,),
                     SizedBox(height: 20,),
-                    Icon(FontAwesomeIcons.user, size: 50),
+                    Icon(FontAwesomeIcons.userPlus, size: 50),
                     MyInputField(title: 'Email', hint: 'email'),
                     MyInputField(title: 'Username', hint: 'username'),
                     MyInputField(title: 'NID', hint: 'nid no'),

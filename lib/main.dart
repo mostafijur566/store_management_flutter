@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:store_management_flutter/pages/dashboard_page.dart';
 import 'package:store_management_flutter/pages/sign_in_page.dart';
 import 'package:get/get.dart';
+import 'package:store_management_flutter/pages/staff/add_staff_mobile.dart';
 import 'package:store_management_flutter/pages/staff/staff_page.dart';
 
 void main() {
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: StaffPage(),
+      home: AddStaffMobile(),
     );
   }
 }
