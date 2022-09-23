@@ -50,7 +50,6 @@ class _DashboardPageState extends State<DashboardPage> {
                 children: [
                   Row(
                     children: [
-                      Icon(FontAwesomeIcons.angleLeft),
                       Image.asset('assets/images/logo.jpg', width: 24,),
                       SizedBox(width: 10,),
                       BigText(text: 'Dashboard', color: Colors.white,),
