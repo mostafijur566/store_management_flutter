@@ -4,12 +4,15 @@ class BigText extends StatelessWidget {
   BigText({Key? key, this.color = const Color(0xFF332d2b),
     required this.text,
     this.size = 0,
-    this.overflow = TextOverflow.ellipsis}) : super(key: key);
+    this.overflow = TextOverflow.ellipsis,
+    this.fontWeight = FontWeight.w600,
+  }) : super(key: key);
 
   Color? color;
   final String text;
   double size;
   TextOverflow overflow;
+  FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class BigText extends StatelessWidget {
       overflow: overflow,
       style: TextStyle(
           color: color,
-          fontWeight: FontWeight.w600,
+          fontWeight: fontWeight,
           fontFamily: 'Roboto',
           fontSize: size == 0 ? 20 : size
       ),

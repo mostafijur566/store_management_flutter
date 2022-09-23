@@ -42,7 +42,7 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
+              padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.04, bottom: MediaQuery.of(context).size.width * 0.04, left: MediaQuery.of(context).size.width * 0.045, right: MediaQuery.of(context).size.width * 0.045),
               width: double.infinity,
               color: AppColors.mainColor,
               child: Row(
