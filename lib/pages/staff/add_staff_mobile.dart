@@ -13,6 +13,9 @@ class AddStaffMobile extends StatefulWidget {
 }
 
 class _AddStaffMobileState extends State<AddStaffMobile> {
+  String accountType = "admin";
+  int _value = 0;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +46,35 @@ class _AddStaffMobileState extends State<AddStaffMobile> {
               MyInputField(title: 'Contact', hint: 'contact no'),
               MyInputField(title: 'Address', hint: 'address'),
               MyInputField(title: 'Password', hint: 'password'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Radio(
+                      activeColor: AppColors.mainColor,
+                      value: 0,
+                      groupValue: _value,
+                      onChanged: (value){
+                        setState(() {
+                          _value = int.parse(value.toString());
+                          accountType = 'admin';
+                        });
+                      }
+                  ),
+                  BigText(text: 'Admin'),
+                  Radio(
+                      activeColor: AppColors.mainColor,
+                      value: 1,
+                      groupValue: _value,
+                      onChanged: (value){
+                        setState(() {
+                          _value = int.parse(value.toString());
+                          accountType = 'staff';
+                        });
+                      }
+                  ),
+                  BigText(text: 'Staff'),
+                ],
+              ),
               SizedBox(height: 20,),
               Container(
                 padding: EdgeInsets.only(top: 10, bottom: 10),
