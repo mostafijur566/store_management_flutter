@@ -5,6 +5,7 @@ import 'package:store_management_flutter/widgets/staff_row.dart';
 
 import '../../utils/app_colors.dart';
 import '../../widgets/big_text.dart';
+import 'dart:io';
 
 class StaffPage extends StatefulWidget {
   const StaffPage({Key? key}) : super(key: key);
@@ -17,8 +18,18 @@ class _StaffPageState extends State<StaffPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _mobile(),
+      body: _selectPlatform(),
     );
+  }
+
+  Widget _selectPlatform(){
+    if(Platform.isAndroid || Platform.isIOS){
+      return _mobile();
+    }
+
+    else{
+      return _desktop();
+    }
   }
 
   Widget _mobile(){
