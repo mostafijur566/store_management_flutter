@@ -9,7 +9,7 @@ class StaffRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.14,
+      width: MediaQuery.of(context).size.width * 0.1,
       child: Center(
           child: BigText(
             text: title == null ? "" : title!,
