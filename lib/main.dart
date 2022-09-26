@@ -3,6 +3,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:store_management_flutter/pages/acount/user_profile_page.dart';
 import 'package:store_management_flutter/pages/dashboard_page.dart';
+import 'package:store_management_flutter/pages/product/add_product_mobile.dart';
 import 'package:store_management_flutter/pages/product/product_page.dart';
 import 'package:store_management_flutter/pages/sign_in_page.dart';
 import 'package:get/get.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: ProductPage(),
+      home: AddProductMobile(),
     );
   }
 }
