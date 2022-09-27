@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:store_management_flutter/pages/acount/user_profile_page.dart';
+import 'package:store_management_flutter/pages/customer/add_customer_mobile.dart';
 import 'package:store_management_flutter/pages/customer/customer_page.dart';
 import 'package:store_management_flutter/pages/dashboard_page.dart';
 import 'package:store_management_flutter/pages/product/add_product_mobile.dart';
