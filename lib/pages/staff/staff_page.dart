@@ -321,7 +321,7 @@ class _StaffPageState extends State<StaffPage> {
                         color: AppColors.mainColor,
                         child: Row(
                           children: [
-                            StaffRow(),
+                            StaffRow(title: '',),
                             StaffRow(title: 'Username'),
                             StaffRow(title: 'Phone'),
                             StaffRow(title: 'email')
