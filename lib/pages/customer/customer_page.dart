@@ -6,6 +6,8 @@ import '../../widgets/big_text.dart';
 import '../../widgets/input_field.dart';
 import '../../widgets/staff_row.dart';
 
+import 'dart:io';
+
 class CustomerPage extends StatefulWidget {
   const CustomerPage({Key? key}) : super(key: key);
 
@@ -17,8 +19,18 @@ class _CustomerPageState extends State<CustomerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _mobile(),
+      body: _selectPlatform(),
     );
+  }
+
+  Widget _selectPlatform(){
+    if(Platform.isAndroid || Platform.isIOS){
+      return _mobile();
+    }
+
+    else{
+      return _desktop();
+    }
   }
 
   Widget _mobile(){
