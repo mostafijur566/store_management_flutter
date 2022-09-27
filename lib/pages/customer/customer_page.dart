@@ -17,11 +17,132 @@ class _CustomerPageState extends State<CustomerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ,
+      body: _mobile(),
     );
   }
 
-  
+  Widget _mobile(){
+    return SafeArea(
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.04, bottom: MediaQuery.of(context).size.width * 0.04, left: MediaQuery.of(context).size.width * 0.045, right: MediaQuery.of(context).size.width * 0.045),
+            width: double.infinity,
+            color: AppColors.mainColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Icon(FontAwesomeIcons.angleLeft, color: Colors.white,),
+                    SizedBox(width: 10,),
+                    BigText(text: 'Customer', color: Colors.white,),
+                  ],
+                ),
+                Row(children: [
+                  BigText(text: 'Add Customer', color: Colors.white,),
+                  SizedBox(width: 10,),
+                  Icon(FontAwesomeIcons.userPlus, color: Colors.white,),
+                ],)
+              ],
+            ),
+          ),
+          SizedBox(height: 10,),
+          Container(
+            margin: EdgeInsets.only(left: 10, right: 10),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 10,
+                      spreadRadius: 7,
+                      offset: Offset(1, 10),
+                      color: Colors.grey.withOpacity(0.2)
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(15)
+            ),
+            child: TextField(
+              onChanged: (value){
+                //_runFilter(value);
+              },
+              decoration: InputDecoration(
+                hintText: 'Search Customer...',
+                prefixIcon: Icon(Icons.search,
+                  color: AppColors.mainColor,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(
+                      width: 1.0,
+                      color: Colors.white
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide(
+                      width: 1.0,
+                      color: Colors.white
+                  ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 15,),
+          Expanded(child: ListView.builder(
+              physics: BouncingScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: 10,
+              itemBuilder: (context, index){
+                return Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
+                      margin: EdgeInsets.only(left: 10, right: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                blurRadius: 10,
+                                spreadRadius: 7,
+                                offset: Offset(5,10),
+                                color: Colors.grey.withOpacity(0.4)
+                            )
+                          ]
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          BigText(text: 'Mostafijur Rahman'),
+                          SizedBox(height: 5,),
+                          Row(
+                            children: [
+                              BigText(text: 'Phone: ', fontWeight: FontWeight.w400, color: Colors.grey[700], size: 16,),
+                              BigText(text: '01757261840', fontWeight: FontWeight.w400, color: Colors.grey[700],size: 16,),
+                            ],
+                          ),
+                          SizedBox(height: 5,),
+                          Row(
+                            children: [
+                              BigText(text: 'Address: ', fontWeight: FontWeight.w600, color: Colors.grey[900], size: 16,),
+                              BigText(text: 'CUFL', fontWeight: FontWeight.w600, color: Colors.grey[900],size: 16,),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10,)
+                  ],
+                );
+              }))
+        ],
+      ),
+    );
+  }
 
   Widget _desktop(){
     return SingleChildScrollView(
