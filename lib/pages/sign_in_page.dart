@@ -1,13 +1,21 @@
 import 'dart:io';
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:store_management_flutter/pages/dashboard_page.dart';
 import 'package:store_management_flutter/utils/app_colors.dart';
 import 'package:store_management_flutter/widgets/input_field.dart';
 
+import '../controller/auth_controller.dart';
+import '../models/sign_in_body_model.dart';
 import '../widgets/app_text_field.dart';
 import '../widgets/big_text.dart';
 import '../widgets/button.dart';
+import 'package:get/get.dart';
+import 'package:store_management_flutter/helper/dependencies.dart' as dep;
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -23,6 +31,58 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController passwordController = TextEditingController();
 
   Color? bgColor;
+
+  void _login(AuthController authController) async{
+
+    String email = emailController.text.toLowerCase().trim();
+    String password = passwordController.text;
+    final bool isValid = EmailValidator.validate(email);
+    if (email.isEmpty) {
+      Get.snackbar(
+        'Required!',
+        'Email field cannot be empty!',
+        icon: Icon(FontAwesomeIcons.triangleExclamation, color: Colors.white,),
+        maxWidth: 450,
+        colorText: Colors.white,
+        backgroundColor: Colors.redAccent,
+      );
+    }
+
+    else if (!isValid) {
+      Get.snackbar(
+        'Invalid!',
+        'Please enter a valid email address!',
+        icon: Icon(FontAwesomeIcons.triangleExclamation, color: Colors.white,),
+        maxWidth: 450,
+        colorText: Colors.white,
+        backgroundColor: Colors.redAccent,
+      );
+    }
+
+    else if (password.isEmpty) {
+      Get.snackbar(
+        'Required!',
+        'Password field cannot be empty!',
+        icon: Icon(FontAwesomeIcons.triangleExclamation, color: Colors.white,),
+        maxWidth: 450,
+        colorText: Colors.white,
+        backgroundColor: Colors.redAccent,
+      );
+    }
+
+
+    else{
+      SignInBody signInBody = SignInBody(username: email, password: password);
+      authController.login(signInBody).then((status)  async{
+        if(status.isSuccess){
+          await dep.init();
+          Get.off(DashboardPage());
+        }
+        else{
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,42 +191,55 @@ class _SignInPageState extends State<SignInPage> {
   Widget _desktop(){
     return Padding(
       padding: const EdgeInsets.only(top: 70),
-      child: Column(
-        children: [
-          Center(
-            child: Container(
-              padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-              height: 400,
-              child: Column(
-                children: [
-                  Text('Store Management', style: TextStyle(
-                      fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold
-                  ),),
-                  SizedBox(height: 20,),
-                  MyInputField(title: 'Email', hint: 'Enter your email'),
-                  MyInputField(title: 'Password', hint: 'Enter your password', hideText: true,),
-                  SizedBox(height: 20,),
-                  Button(title: "Log In",)
-                ],
-              ),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 7,
-                      spreadRadius: 10,
-                      offset: Offset(0,0),
-                      color: Colors.grey.withOpacity(0.4),
+      child: GetBuilder<AuthController>(builder: (_authController){
+        return ModalProgressHUD(
+            inAsyncCall: _authController.isLoading,
+            child: Column(
+          children: [
+            Center(
+              child: Container(
+                padding: EdgeInsets.only(top: 10, left: 20, right: 20),
+                height: 400,
+                child: Column(
+                  children: [
+                    Text('Store Management', style: TextStyle(
+                        fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold
+                    ),
+                    ),
+                    SizedBox(height: 20,),
+                    MyInputField(title: 'Email', hint: 'Enter your email', controller: emailController,),
+                    MyInputField(title: 'Password', hint: 'Enter your password', hideText: true,controller: passwordController,),
+                    SizedBox(height: 20,),
+                    GestureDetector(
+
+                      onTap: (){
+                        _login(_authController);
+                      },
+                      child: Button(
+                        title: "Log In",
+                      ),
                     )
-                  ]
+                  ],
+                ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 7,
+                        spreadRadius: 10,
+                        offset: Offset(0,0),
+                        color: Colors.grey.withOpacity(0.4),
+                      )
+                    ]
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 20,),
-          BigText(text: 'Powered by Mostafijur Rahman', size: 16, color: Colors.grey[700],)
-        ],
-      ),
+            SizedBox(height: 20,),
+            BigText(text: 'Powered by Mostafijur Rahman', size: 16, color: Colors.grey[700],)
+          ],
+        ));
+      },),
     );
   }
 }

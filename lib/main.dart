@@ -1,18 +1,15 @@
 import 'dart:io';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
-import 'package:store_management_flutter/pages/acount/user_profile_page.dart';
-import 'package:store_management_flutter/pages/customer/add_customer_mobile.dart';
 import 'package:store_management_flutter/pages/customer/customer_page.dart';
-import 'package:store_management_flutter/pages/dashboard_page.dart';
-import 'package:store_management_flutter/pages/product/add_product_mobile.dart';
-import 'package:store_management_flutter/pages/product/product_page.dart';
-import 'package:store_management_flutter/pages/sign_in_page.dart';
 import 'package:get/get.dart';
-import 'package:store_management_flutter/pages/staff/add_staff_mobile.dart';
-import 'package:store_management_flutter/pages/staff/staff_page.dart';
+import 'package:store_management_flutter/pages/sign_in_page.dart';
 
-void main() {
+import 'helper/dependencies.dart' as dep;
+
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await dep.init();
   runApp(const MyApp());
   if(Platform.isWindows || Platform.isMacOS || Platform.isLinux){
     doWhenWindowReady(() {
@@ -44,7 +41,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: CustomerPage(),
+      home: SignInPage(),
     );
   }
 }
