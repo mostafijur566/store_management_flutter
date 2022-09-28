@@ -26,6 +26,22 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
 
+  @override
+  void initState() {
+    super.initState();
+    //checkSavedLogin();
+  }
+
+  checkSavedLogin() async{
+    if(Get.find<AuthController>().userLoggedIn()){
+      await Get.find<AuthController>().loggedInUser();
+      Get.off(DashboardPage());
+    }
+    else{
+      Get.off(SignInPage());
+    }
+  }
+
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -37,37 +53,71 @@ class _SignInPageState extends State<SignInPage> {
     String email = emailController.text.toLowerCase().trim();
     String password = passwordController.text;
     final bool isValid = EmailValidator.validate(email);
+
     if (email.isEmpty) {
-      Get.snackbar(
-        'Required!',
-        'Email field cannot be empty!',
-        icon: Icon(FontAwesomeIcons.triangleExclamation, color: Colors.white,),
-        maxWidth: 450,
-        colorText: Colors.white,
-        backgroundColor: Colors.redAccent,
-      );
+      if(Platform.isAndroid || Platform.isIOS){
+        Get.snackbar(
+          'Required!',
+          'Email field cannot be empty!',
+          icon: Icon(FontAwesomeIcons.triangleExclamation, color: Colors.white,),
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent,
+        );
+      }
+      else{
+        Get.snackbar(
+          'Required!',
+          'Email field cannot be empty!',
+          icon: Icon(FontAwesomeIcons.triangleExclamation, color: Colors.white,),
+          maxWidth: 450,
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent,
+        );
+      }
     }
 
     else if (!isValid) {
-      Get.snackbar(
-        'Invalid!',
-        'Please enter a valid email address!',
-        icon: Icon(FontAwesomeIcons.triangleExclamation, color: Colors.white,),
-        maxWidth: 450,
-        colorText: Colors.white,
-        backgroundColor: Colors.redAccent,
-      );
+      if(Platform.isAndroid || Platform.isIOS){
+        Get.snackbar(
+          'Invalid!',
+          'Please enter a valid email!',
+          icon: Icon(FontAwesomeIcons.triangleExclamation, color: Colors.white,),
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent,
+        );
+      }
+      else{
+        Get.snackbar(
+          'Invalid!',
+          'Please enter a valid email!',
+          icon: Icon(FontAwesomeIcons.triangleExclamation, color: Colors.white,),
+          maxWidth: 450,
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent,
+        );
+      }
     }
 
     else if (password.isEmpty) {
-      Get.snackbar(
-        'Required!',
-        'Password field cannot be empty!',
-        icon: Icon(FontAwesomeIcons.triangleExclamation, color: Colors.white,),
-        maxWidth: 450,
-        colorText: Colors.white,
-        backgroundColor: Colors.redAccent,
-      );
+      if(Platform.isAndroid || Platform.isIOS){
+        Get.snackbar(
+          'Required!',
+          'Password field cannot be empty!',
+          icon: Icon(FontAwesomeIcons.triangleExclamation, color: Colors.white,),
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent,
+        );
+      }
+      else{
+        Get.snackbar(
+          'Required!',
+          'Password field cannot be empty!',
+          icon: Icon(FontAwesomeIcons.triangleExclamation, color: Colors.white,),
+          maxWidth: 450,
+          colorText: Colors.white,
+          backgroundColor: Colors.redAccent,
+        );
+      }
     }
 
 
@@ -107,85 +157,95 @@ class _SignInPageState extends State<SignInPage> {
 
   Widget _mobile(BuildContext context){
     return SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
-              ),
-              Hero(
-                tag: 'logo',
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  child: Center(
-                      child: Image.asset('assets/images/logo.jpg',
-                        width: 120,
-                      )
-                  ),
-                ),
-              ),
-
-              Container(
-                width: double.maxFinite,
-                margin: EdgeInsets.only(left: 20),
+        child: GetBuilder<AuthController> (builder: (_authController){
+          return ModalProgressHUD(
+              inAsyncCall: _authController.isLoading,
+              child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Hello',
-                      style: TextStyle(
-                          fontSize: 20 * 3 + 20 / 2,
-                          fontWeight: FontWeight.bold
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    Hero(
+                      tag: 'logo',
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.25,
+                        child: Center(
+                            child: Image.asset('assets/images/logo.jpg',
+                              width: 120,
+                            )
+                        ),
                       ),
                     ),
 
-                    Text('Log into your account',
-                      style: TextStyle(
-                          fontSize: 20 ,
-                          color: Colors.grey[500]
+                    Container(
+                      width: double.maxFinite,
+                      margin: EdgeInsets.only(left: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Hello',
+                            style: TextStyle(
+                                fontSize: 20 * 3 + 20 / 2,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
+
+                          Text('Log into your account',
+                            style: TextStyle(
+                                fontSize: 20 ,
+                                color: Colors.grey[500]
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    AppTextField(
+                      emailController: emailController,
+                      hintText: 'Email',
+                      icon: Icons.email,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    AppTextField(
+                      emailController: passwordController,
+                      hintText: 'Password',
+                      icon: Icons.password_sharp,
+                      hideText: true,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        _login(_authController);
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: MediaQuery.of(context).size.height / 13,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: AppColors.mainColor),
+                        child: Center(
+                          child: BigText(
+                            text: 'Log In',
+                            color: Colors.white,
+                            size: 26,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 30,),
+                    BigText(text: 'Powered by Mostafijur Rahman', size: 16, color: Colors.grey[700],)
                   ],
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              AppTextField(
-                emailController: emailController,
-                hintText: 'Email',
-                icon: Icons.email,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              AppTextField(
-                emailController: passwordController,
-                hintText: 'Password',
-                icon: Icons.password_sharp,
-                hideText: true,
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width / 2,
-                height: MediaQuery.of(context).size.height / 13,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: AppColors.mainColor),
-                child: Center(
-                  child: BigText(
-                    text: 'Log In',
-                    color: Colors.white,
-                    size: 26,
-                  ),
-                ),
-              ),
-              SizedBox(height: 30,),
-              BigText(text: 'Powered by Mostafijur Rahman', size: 16, color: Colors.grey[700],)
-            ],
-          ),
-        )
+              )
+          );
+        },)
     );
   }
   Widget _desktop(){
